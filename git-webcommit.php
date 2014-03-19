@@ -15,15 +15,16 @@
     $defaultrepo = 0;
 
     // configure the authentication method:
-    //$authmethod = 'httpbasic';
+    $authmethod = 'httpbasic';
     //  $authmethod = 'htpasswd';
-    $authmethod = 'none';
+    //$authmethod = 'none';
 
     // when using htpasswd, the 'pass' entry isn't needed
     // 'name' and 'email' are required.
     $auth = Array (
         'testuser2' => Array ('pass' => 'a94a8fe5ccb19ba61c4c0873d391e987982fbbd3', 'name' => 'Test User', 'email' => 'test@somewhere'),
         'dasun' => Array ('pass' => '2a1ce84c239d31a61920321d3d00f76e7dbd7a75', 'name' => 'Dasun Heenatigala', 'email' => 'dasun@emarketingeye.com'),
+        'anushka' => Array ('pass' => '2a1ce84c239d31a61920321d3d00f76e7dbd7a75', 'name' => 'Anushka Dissanayaka', 'email' => 'anushka@emarketingeye.com'),
     );
 
     // passwords are sha1 hashes, uncomment next line to create the password hash:
@@ -310,7 +311,10 @@
 
             global $autopush;
             if ($autopush === true) {
+                $str = "commiting changed files... OK";
+                echo html_header_message_update ($str . "<br>pushing changed files...");
                 do_push();
+                echo html_header_message_update ($str . "<br>pushing changed files...OK");
             }
 
         } else {
