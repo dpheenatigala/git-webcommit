@@ -16,6 +16,8 @@ Basic workflow:
 When you visit the webpage it displays a list of added/removed/changed/renamed files, you click on the filename you might want
 to commit to see the diff, you stage the file(s), you write a commit message and commit.
 
+Also allows to optionally push on commit by setting autopush 
+
 Installation/setup:
 All you need is a git repository on the server, change some settings at the top and upload the single PHP-file to your webserver.
 
