@@ -294,7 +294,7 @@
             $args [] = '--author';
             $args [] = $author;
         }
-        debug ('git ' . implode (' ', $args), true); die();
+        debug ('git ' . implode (' ', $args), true);
         $h = start_command ($gitpath, $args);
         list ($stdout, $stderr) = get_all_data ($h, Array ('stdout', 'stderr'));
         debug ("stdout: $stdout");
@@ -307,24 +307,25 @@
         if ($exit === 0) {
             echo html_header_message_update ("commiting changed files... OK");
             $commit_message = '';
-        } else {
-            echo html_header_message_update ('commiting changed files...: <span class="error">FAILED</a>', true);
-            if (trim ($stderr) != '')
-                error ("$stderr");
-            echo html_form_end ();
 
             global $autopush;
             if ($autopush === true) {
                 do_push();
             }
 
+        } else {
+            echo html_header_message_update ('commiting changed files...: <span class="error">FAILED</a>', true);
+            if (trim ($stderr) != '')
+                error ("$stderr");
+            echo html_form_end ();
             exit ();
         }
     }
 
 
     function do_push() {
-        run_git_command(['push', '']);
+        global $remoterepo, $localbranch;
+        run_git_command(['push', $remoterepo, $localbranch]);
     }
 
     function run_git_command($args) {
