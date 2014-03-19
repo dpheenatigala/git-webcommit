@@ -294,7 +294,7 @@
             $args [] = '--author';
             $args [] = $author;
         }
-        debug ('git ' . implode (' ', $args), true);
+        debug ('git ' . implode (' ', $args));
         $h = start_command ($gitpath, $args);
         list ($stdout, $stderr) = get_all_data ($h, Array ('stdout', 'stderr'));
         debug ("stdout: $stdout");
