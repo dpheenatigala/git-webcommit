@@ -312,9 +312,9 @@
             global $autopush;
             if ($autopush === true) {
                 $str = "commiting changed files... OK";
-                echo html_header_message_update ($str . "<br>pushing changed files...");
+                echo html_header_message_update ($str . "<br>pushing changed files...", true);
                 do_push();
-                echo html_header_message_update ($str . "<br>pushing changed files...OK");
+                echo html_header_message_update ($str . "<br>pushing changed files...OK", true);
             }
 
         } else {
