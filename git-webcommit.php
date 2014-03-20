@@ -9,7 +9,13 @@
     $autopush = true;
 
     // configure the list of repositories, only one support at the moment
-    $repos = Array(__DIR__);
+    // allow setting the directory by using a get variable
+    if (isset($_GET['dir'])) {
+        $repos = Array($_GET['dir']);
+    }
+    else {
+        $repos = Array(__DIR__);
+    }
 
     // set the default repository, you probably want to keep it set to 0
     $defaultrepo = 0;
@@ -1089,7 +1095,14 @@ return <<<HERE
 <!DOCTYPE HTML>
 
 <html>
-    <head><title>git webcommit$strtitle</title><style>$css</style><script>$js</script></head>
+    <head>
+        <title>git webcommit$strtitle</title>
+        <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/googlecode.min.css">
+        <script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+        <style>$css</style>
+        <script>$js</script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
     <body>
 HERE;
     }
@@ -1111,6 +1124,7 @@ return <<<HERE
     BODY { background-color: #fff; font-family: arial; font-size: 13px; text-align: center; margin: 0; pading: 0; }
     FORM { width: $totalwidth; margin: 0 auto; text-align: left; }
     TEXTAREA { display: none; width: 100%; height: 300px; border: 1px solid black; font-size: 11px; }
+    DIV.diff { display: none; width: 100%; border: 1px solid black; font-size: 11px; }
     ARTICLE DIV:nth-child(even) { background-color: #efefef }
     .filename_div { cursor: pointer; border: 1px solid black; width: $totalwidth; padding-top: 3px; padding-bottom: 3px; margin-top: $margin; margin-bottom: $margin; overflow: hidden; background-color: inherit}
     .state_span, .staged_span, .checkbox_span { float: left; padding-left: $padding; padding-right: $padding; }
@@ -1281,7 +1295,7 @@ $str = <<<HERE
 <input id="${prefix}_filename" type="hidden" name="filename[]" value="$filename">
 <input id="${prefix}_hash" type="hidden" name="hash[]" value="$hash">
 <input id="${prefix}_prefix" type="hidden" name="prefix[]" value="$prefix">
-<textarea id="${prefix}_textarea">$diff</textarea>
+<div class="diff" id="${prefix}_textarea"><pre class="diff"><code>$diff</code></pre></div>
 <script>$js</script></div>
 HERE;
 
